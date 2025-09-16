@@ -23,6 +23,10 @@ body {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  display: grid;
+  grid-template-columns: 150px 120 px 100px;
+  column-gap: 10px;
+  row-gap: 10px;
 }
 
 /* Heading */
@@ -66,25 +70,34 @@ body {
 
 /* List container */
 .lists {
-  margin-top: 10px;
+  margin-top: 10px; 
   border: 1px solid gray;
   border-radius: 7px;
   overflow: hidden;
+   display: flex;
+  flex-direction: column; /* Stacks items vertically */
+  gap: 10px; 
+  
+  
 }
 
 /* Individual item */
 .item {
-  border-bottom: 1px solid gray;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid gray;
   background: #fff;
+  gap: 5px;
+   
 }
 
 .item:last-child {
   border-bottom: none;
 }
+
+
 
 /* Buttons inside list items */
 .buttons {

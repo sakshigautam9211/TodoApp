@@ -1,26 +1,51 @@
-let inputValue = ''
-let listItems = []
+let todoList = [
+  { item: 'Buy Milk', dueDate: '4/10/2023' },
+  { item: 'Go to College', dueDate: '4/10/2023' }
+];
 
-let input = document.getElementById('input')
-let button = document.querySelector('.button')
+displayItems();
 
-const handleChange = (event) => {
-    inputValue = event.target.value
+function addTodo() {
+  let inputElement = document.querySelector('#input');
+  let dateElement = document.querySelector('#date');
+  let todoItem = inputElement.value.trim();
+  let todoDate = dateElement.value;
+
+  if (todoItem === '') {
+    alert("Please enter a todo!");
+    return;
+  }
+
+  todoList.push({ item: todoItem, dueDate: todoDate });
+  inputElement.value = '';
+  dateElement.value = '';
+  displayItems();
 }
 
-const handleSubmit = () => {
-    listItems.push(inputValue)
-    localStorage.setItem('todos', JSON.stringify(listItems))
-    renderList()
-    input.value = ''
-    inputValue = ''
+function displayItems() {
+  let listElement = document.querySelector('.lists');
+  let newHtml = '';
+
+  for (let i = 0; i < todoList.length; i++) {
+    let { item, dueDate } = todoList[i];
+
+    newHtml += `
+      <div class="item">
+        <span>${item}</span>
+        <span>${dueDate}</span>
+        <div class="buttons">
+          <button onclick="deleteTodo(${i})">Delete</button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Update once after loop finishes
+  listElement.innerHTML = newHtml;
 }
 
-const renderList = () => {
-    let todos = JSON.parse(localStorage.getItem('todos'))
-    let list = document.querySelector('.list')
-    list.innerHTML = ''
+function deleteTodo(index) {
+  todoList.splice(index, 1);
+  displayItems();
 }
 
-input.addEventListener('input', handleChange)
-button.addEventListener('click', handleSubmit)
